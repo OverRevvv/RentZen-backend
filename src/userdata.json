@@ -1,0 +1,10 @@
+[{
+    "name" : "string",
+    "address" : [{
+        "state" : "string",
+        "city" : "string",
+        "zip" : 334334,
+        "area": ""
+    }]
+    
+}]
