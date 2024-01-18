@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { ItemsModule } from './items/items.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthModule } from './auth/auth.module';
       `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@freecluster.tfe0qix.mongodb.net/rentZen?retryWrites=true&w=majority`,
     ),
     ItemsModule,
+    UsersModule,
     AuthModule,
   ],
   controllers: [AppController],

@@ -1,10 +1,26 @@
-[{
-    "name" : "string",
-    "address" : [{
-        "state" : "string",
-        "city" : "string",
-        "zip" : 334334,
-        "area": ""
-    }]
-    
-}]
+[
+  {
+    "name": "admin",
+    "email": "admin@dev",
+    "password": "string",
+    "phone": "number",
+    "address": [
+      {
+        "state": "statless",
+        "city": "cityless",
+        "zip": "number",
+        "area": "arealess"
+      }
+    ],
+    "joinedDate": "date",
+    "verified": "boolean",
+    "postedItems": ["itemID", "itemID2"],
+    "cartItems": [
+      {
+        "itemID": "string",
+        "tenureDuration": "string",
+        "tenurePrice": "number"
+      }
+    ]
+  }
+]

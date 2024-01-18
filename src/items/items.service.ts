@@ -16,7 +16,7 @@ export class ItemsService {
       const items = await this.itemModel.find({}).exec();
       return items;
     } catch (error) {
-      throw new NotFoundException('No items found and ', error);
+      throw new NotFoundException('No items found ', error);
     }
   }
 
@@ -38,7 +38,7 @@ export class ItemsService {
       }
       return 'Item created successfully';
     } catch (error) {
-      throw new NotFoundException('Something Went wrong', error);
+      throw new NotFoundException('Something Went wrong ', error);
     }
   }
 
@@ -57,7 +57,7 @@ export class ItemsService {
       }
       return 'Item created successfully';
     } catch (error) {
-      throw new NotFoundException('No items found and ', error);
+      throw new NotFoundException('Something Went wrong ', error);
     }
   }
 }

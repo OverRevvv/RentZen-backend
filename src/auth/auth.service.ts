@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class AuthService {
-  signIn(): string {
-    return 'Sign In';
-  }
+  constructor(private readonly userService: UsersService) {}
 
-  logIn(): string {
-    return 'Log In';
+  async logIn(userCred: any): Promise<string> {
+    return await this.userService.authenticateUser(userCred);
   }
 
   deleteUser(): string {
