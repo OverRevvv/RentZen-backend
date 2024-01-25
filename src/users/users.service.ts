@@ -4,6 +4,9 @@ import { Model } from 'mongoose';
 import { user, userDocument } from './model/user.model';
 import { CreateUserDTO } from './dto/createUserDTO';
 import { UpdateUserDTO } from './dto/updateUserDTO';
+import * as bcrypt from 'bcrypt';
+
+const saltRounds: number = 10;
 
 @Injectable()
 export class UsersService {
@@ -19,7 +22,14 @@ export class UsersService {
       if (userExists) {
         return 'User already exists';
       }
-      const newUser = new this.userModel(createUserDTO);
+      const hashedPassword = await bcrypt.hash(
+        createUserDTO.password,
+        saltRounds,
+      );
+      const newUser = new this.userModel({
+        ...createUserDTO,
+        password: hashedPassword,
+      });
       const result = await newUser.save();
       if (!result) {
         return "something went wrong and can't confirm if user was created";
@@ -48,30 +58,20 @@ export class UsersService {
         },
         { new: true },
       );
+
       const result = await updatedUser.save();
+
       if (!result) {
         return 'something went wrong';
       }
+
       return 'User created successfully';
     } catch (error) {
       throw new NotFoundException('Something Went wrong ', error);
     }
   }
 
-  async authenticateUser(userCred: UpdateUserDTO): Promise<string> {
-    try {
-      const findUser = await this.userModel
-        .findOne({ email: userCred.email })
-        .exec();
-      if (!findUser) {
-        return 'User not found';
-      }
-      if (findUser.password !== userCred.password) {
-        return 'Password is incorrect';
-      }
-      return 'User is valid';
-    } catch (error) {
-      throw new NotFoundException('Something Went wrong ', error);
-    }
+  async findOneWithEmail(mail: string): Promise<user> {
+    return await this.userModel.findOne({ email: mail });
   }
 }
