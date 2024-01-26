@@ -3,7 +3,7 @@ import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { user } from 'src/users/model/user.model';
-import { authPayloadDTO } from './dto/authPayloadDTO';
+import { loginCredentialDTO } from './dto/loginCredentialDTO';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +26,7 @@ export class AuthService {
     return "password doesn't match";
   }
 
-  async login(user: authPayloadDTO) {
+  async login(user: loginCredentialDTO): Promise<any> {
     const payload = {
       email: user.email,
     };
@@ -37,6 +37,15 @@ export class AuthService {
     };
   }
 
+  async refreshToken(user: any): Promise<any> {
+    const payload = {
+      email: user?.email,
+    };
+
+    return {
+      accessToken: this.jwtService.sign(payload),
+    };
+  }
   deleteUser(): string {
     return 'user has been deleted';
   }
