@@ -65,7 +65,7 @@ export class UsersService {
         return 'something went wrong';
       }
 
-      return 'User created successfully';
+      return "User's data updated successfully";
     } catch (error) {
       throw new NotFoundException('Something Went wrong ', error);
     }
