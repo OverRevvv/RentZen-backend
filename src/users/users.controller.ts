@@ -14,10 +14,14 @@ import { CreateUserDTO } from './dto/createUserDTO';
 import { user } from './model/user.model';
 import { JwtGuard } from 'src/auth/guards/jwt.auth.guard';
 import { UpdateUserDTO } from './dto/updateUserDTO';
+import { MailService } from 'src/mail/mail.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: UsersService) {}
+  constructor(
+    private readonly userService: UsersService,
+    private readonly mailService: MailService,
+  ) {}
 
   @Post('register')
   @HttpCode(201)
@@ -46,11 +50,21 @@ export class UsersController {
 
   @Get('verify')
   @HttpCode(200)
-  @UsePipes(ValidationPipe)
-  async verifyUser(@Query('id') userID: string): Promise<string> {
+  // @UsePipes(ValidationPipe)
+  async verifyUser(
+    @Query('id') userID: string,
+    @Query('email') email: string,
+  ): Promise<string> {
     const verify = {
       verified: true,
     };
-    return await this.userService.updateUser(userID, verify);
+    const updated = await this.userService.updateUser(userID, verify);
+    if (updated) {
+      await this.mailService.sendVerifiedMail(email);
+      return 'User verified successfully';
+    }
+    return 'Something went wrong';
+    // try {
+    // } catch (error) {}
   }
 }

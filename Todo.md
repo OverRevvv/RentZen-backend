@@ -162,6 +162,8 @@
 4. `Rented Items has to be returned mail` : To let user know that the Item's duration is about to expire
 
 5. `Item is one its way back` : Notify users who put item to rent know that items is come back again to them. 
+6. `Verify your email mail for verification` : Confirm and verify the email address given by user. 
+7. `Your email has been verified` : Let user know that his/her email has been verified and they can use RentZen like they're suppose to be. 
 </details>
 
 <br>

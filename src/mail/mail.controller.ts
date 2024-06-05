@@ -6,8 +6,8 @@ export class MailController {
   constructor(private readonly mailService: MailService) {}
 
   @Get('test')
-  async testMail() {
-    return await this.mailService.testMail();
+  async testMail(@Query('email') email: string) {
+    return await this.mailService.sendVerifiedMail(email);
   }
 
   @Get('verify')
