@@ -1,0 +1,9 @@
+node_modules
+.vscode
+Todo.md
+test
+.gitignore
+.git
+.prettierrc
+Dockerfile
+README.md

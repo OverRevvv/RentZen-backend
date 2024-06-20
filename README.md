@@ -45,6 +45,14 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Running the app Docker 🐋
+
+```bash
+# Pull docker image
+docker pull overrevvv/rentzenserver:0.0.0
+# Run docker app 
+docker -p 3000:3000 -e DBUSER=VALUE -e DBPASS=VALUE overrevvv/rentzenserver:0.0.0
+```
 ## Test
 
 ```bash
